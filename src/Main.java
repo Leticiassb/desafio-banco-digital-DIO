@@ -3,12 +3,11 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
 
-        Cliente venilton = new Cliente();
-        venilton.setNome("Venilton");
+        Cliente cliente = new Cliente();
+        cliente.setNome("cliente1");
 
-        Conta corrente = new ContaCorrente(venilton);
-        Conta poupanca = new ContaPoupança(venilton);
-
+        Conta corrente = new ContaCorrente(cliente);
+        Conta poupanca = new ContaPoupança(cliente);
 
 
         String menu = ("""
@@ -18,6 +17,11 @@ public class Main {
                 3-Consultar Saldo
                 4-Transferir
                 """);
+
+        String tiposConta = ("""
+                \nSelecione uma opção:
+                C- Conta Corrente
+                P- Conta Poupança""");
 
         Scanner selecao = new Scanner(System.in);
 
@@ -30,10 +34,7 @@ public class Main {
             switch (opcao) {
 
                 case 1:
-                    System.out.println("""
-                            \nSelecione uma opção:
-                            C- Conta Corrente
-                            P- Conta Poupança""");
+                    System.out.println(tiposConta);
                     String tipoConta = selecao.next();
                     if (tipoConta.equalsIgnoreCase("C")) {
                         System.out.println("Digite o valor a ser depositado: ");
@@ -57,10 +58,7 @@ public class Main {
 
 
                 case 2:
-                    System.out.println("""
-                            \nSelecione uma opção:
-                            C- Conta Corrente
-                            P- Conta Poupança""");
+                    System.out.println(tiposConta);
                     String tipoConta1 = selecao.next();
                     System.out.println("Digite o valor que deseja sacar: ");
                     double saque = selecao.nextInt();
@@ -84,10 +82,7 @@ public class Main {
 
 
                 case 3:
-                    System.out.println("""
-                            \nSelecione uma opção:
-                            C- Conta Corrente
-                            P- Conta Poupança""");
+                    System.out.println(tiposConta);
                     String tipoConta2 = selecao.next();
                     if (tipoConta2.equalsIgnoreCase("C")) {
                         System.out.println("Seu saldo é: R$ " + corrente.getSaldo());
@@ -99,23 +94,19 @@ public class Main {
                     break;
 
                 case 4:
-                    System.out.println("""
-                            \nSelecione uma opção:
-                            C- Conta Corrente
-                            P- Conta Poupança""");
+                    System.out.println(tiposConta);
                     String tipoConta3 = selecao.next();
                     System.out.println("Digite o valor que deseja transferir: ");
                     double transferencia = selecao.nextInt();
                     if (tipoConta3.equalsIgnoreCase("C")) {
-                       corrente.transferir(poupanca, transferencia );
+                        corrente.transferir(poupanca, transferencia);
                         System.out.println("Transferência realizada");
                     }
                     if (tipoConta3.equalsIgnoreCase("P")) {
-                        poupanca.transferir(corrente, transferencia );
+                        poupanca.transferir(corrente, transferencia);
                         System.out.println("Transferência realizada");
                     }
                     break;
-
 
 
                 default:
